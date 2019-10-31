@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load blog_tags %}
+
+{% block title %}{{ post.title.title }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h2 class="title">{{ post.title.title }}</h2>
+                <div class="card card-plain">
+                    <div class="card-body">
+                        <h4 class="card-title">Published {{ post.publish }} by <a href="{% url "blog:post_by_author" post.author %}">{{ post.author }}</a></h4>
+                        <h6 class="card-subtitle mb-2 text-muted">Published on {{ post.publish }} by <a href="{% url "blog:post_by_author" post.author %}">{{ post.author }}</a></h6>
+                        <p class="card-text ">{{ post.body }}</p>
+                        {% for tag in post.tags.all %}
+                            <span class="badge badge-default bg-dark">
+                                <a href="{% url "blog:post_by_tag" tag.slug %}" style="color:white;">{{ tag.name }}</a>
+                            </span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <h4 class="title">Add a new comment</h4>
+                <form action="." method="post">
+                    {% csrf_token %}
+                    {% for hidden_field in comment_form.hidden_fields %}
+                        {{ hidden_field.errors }}
+                        {{ hidden_field }}
+                    {% endfor %}
+                    {{ comment_form.errors }}
+                    <div class="form-group">
+                        {% render_field comment_form.name class="form-control" placeholder='Name' %}
+                    </div>
+                    <div class="form-group">
+                        {% render_field comment_form.email class="form-control" placeholder='Email Address' %}
+                    </div>
+                    <div class="form-group">
+                        {% render_field comment_form.body class="form-control" placeholder='Body' %}
+                    </div>
+                    <input type="submit" class="btn btn-primary float-right" style="background-color:#0fbf65; border-color:#0fbf65;" value="Add comment">
+                </form>
+                <br><br>
+                <h4 class="title">Comments</h4>
+                {% for comment in comments %}
+                    <p>{{ comment.body }}</p>
+                    <h6 class="mb-2 text-muted">Created in {{ comment.created }} by {{ comment.name }}</h6>
+                    <hr>
+                {% empty %}
+                    <h6 class="mb-2 text-muted">There are no comments yet.</h6>
+                {% endfor %}
+                <br>
+            </div>
+            <div class="col-md-4">
+                <h5 class="title">Search</h5>
+                {% include "blog/post/search_form.html" with form=search_form %}
+                <h5 class="title">Similar Posts</h5>
+                <ul class="list-group list-group-flush">
+                    {% for post in similar_posts %}
+                        <li class="list-group-item"><a href="{{ post.get_absolute_url }}">{{ post.title.title }}</a></li>
+                    {% empty %}
+                        <p class="mb-2 text-muted">There are no similar posts</p>
+                    {% endfor %}
+                </ul>
+                <h5 class="title">Latest Posts</h5>
+                {% get_latest_posts 3 %}
+                <h5 class="title">Most Commented Posts</h5>
+                {% get_most_commented_posts 3 %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

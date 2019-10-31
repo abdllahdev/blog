@@ -1,0 +1,63 @@
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li class="page-item {% if not page.has_previous %}disabled{% endif %}">
+            {% if page.has_previous %}
+                <a  class="page-link"href="?page={{ page.previous_page_number }}">Previous</a>
+            {% else %}
+                <span class='page-link'>Previous</span>
+            {% endif %}
+        </li>
+
+        <li class="page-item {% if not page %}disabled{% endif %}">
+            {% if page.paginator.num_pages > 1 %}
+                {% if page.number == 1 %}
+                    <li class="page-item active">
+                        <a class="page-link bg-dark" href="?page=1"> 1 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page=2">2</a>
+                    </li>
+                    {% if page.paginator.num_pages > 2 %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=3">3</a>
+                        </li>
+                    {% endif %}
+                {% elif page.number == page.paginator.num_pages %}
+                    {% if page.paginator.num_pages > 2 %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page.previous_page_number|add:'-1' }}">{{ page.previous_page_number|add:'-1' }}</a>
+                        </li>
+                    {% endif %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page.previous_page_number }}">{{ page.previous_page_number }}</a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link bg-dark" href="?page={{ page.number }}">{{ page.number }}<span class="sr-only">(current)</span></a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page.previous_page_number }}">{{ page.previous_page_number }}</a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link bg-dark" href="?page={{ page.number }}"> {{ page.number }} <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page.next_page_number }}">{{ page.next_page_number }}</a>
+                    </li>
+                {% endif %}
+            {% elif page.paginator.num_pages == 1 %}
+                <li class="page-item active">
+                    <a class="page-link bg-dark" href="?page={{ page.number }}">1 <span class="sr-only ">(current)</span></a>
+                </li>
+            {% endif %}
+        </li>
+
+        <li class="page-item {% if not page.has_next %}disabled{% endif %}">
+            {% if page.has_next %}
+                <a  class="page-link" href="?page={{ page.next_page_number }}">Next</a>
+            {% else %}
+                <span class='page-link'>Next</span>
+            {% endif %}
+        </li>
+    </ul>
+</nav>

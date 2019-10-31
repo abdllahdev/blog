@@ -1,0 +1,6 @@
+django
+django-taggit
+django-widget-tweaks
+elasticsearch>=2.0.0,<3.0.0
+django-haystack
+mysqlclient

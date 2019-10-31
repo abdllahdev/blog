@@ -1,0 +1,58 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>{% block title %}{% endblock title %}</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- Material Kit CSS -->
+  <link href="{% static 'css/material-kit.css' %}" rel="stylesheet" />
+</head>
+
+<body>
+  <nav class="navbar fixed-top navbar-expand-lg bg-dark">
+    <div class="container">
+      <div class="navbar-translate">
+        <a class="navbar-brand" href="{% url 'blog:post_list' %}">Abdullah's Blog</a>
+      </div>
+    </div>
+  </nav>
+  <div class="page-header header-filter" data-parallax="true" style="background-image: url({% static 'img/bg3.jpg' %})">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto">
+          <div class="brand text-center">
+            <h1>Abdullah Fathy</h1>
+            <h3 class="title text-center">The place where I share my thoughts</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main main-raised">
+    {% block content %}
+    {% endblock content %}
+  </div>
+  <footer class="footer footer-default">
+    <div class="container">
+      <nav class="float-left">
+        <ul>
+          <li>
+            <a href="{% url 'blog:post_list' %}">
+              Abdullah Fathy
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+</body>
+
+</html>
