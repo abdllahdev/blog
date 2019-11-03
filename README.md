@@ -11,7 +11,7 @@ Features:
   <li>Filter posts by author and tag</li>
 </ul>
 <br>
-Technologies used:
+Technologies and libraries used:
 <ul>
   <li>Django</li>
   <li>Elasticsearch with Haystack</li>
