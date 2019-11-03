@@ -1,12 +1,21 @@
-# MyBlog
-<<<<<<< HEAD
-Basic blog with simple features
+<h2>Basic blog with simple features</h2>
+
 Features:
-  1- Posts
-  2- Tags on posts
-  3- Comments on post
-  4- Share post by email
-  5- Filter posts by author and tag
-=======
-Simple Blog with Basic Features
->>>>>>> 12ca09ef5669bba994e026ce59da0677e031b13f
+<ul>
+  <li>Posts</li>
+  <li>Tags for posts</li>
+  <li>Comments on post</li>
+  <li>Share post by email</li>
+  <li>Get posts by author</li>
+  <li>Get posts by tags</li>
+  <li>Filter posts by author and tag</li>
+</ul>
+<br>
+Technologies:
+<ul>
+  <li>Django</li>
+  <li>Elasticsearch with Haystack</li>
+  <li>Django Taggit</li>
+  <li>Django Widget Tweaks</li>
+  <li>MySQL</li>
+</ul>
